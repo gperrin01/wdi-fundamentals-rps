@@ -25,7 +25,6 @@ function getPlayerMove(move) {
     // Write an expression that operates on a variable called `move`	
     // If a `move` has a value, your expression should evaluate to that value.
     // However, if `move` is not specified / is null, your expression should equal `getInput()`.
-    var move;
     return move || getInput();
 }
 
@@ -33,29 +32,65 @@ function getComputerMove(move) {
     // Write an expression that operates on a variable called `move`
     // If a `move` has a value, your expression should evaluate to that value.
     // However, if `move` is not specified / is null, your expression should equal `randomPlay()`.
-    var move;
     return move || randomPlay();
 }
 
 function getWinner(playerMove,computerMove) {
-	var winner;
-	if (playerMove === computerMove) {
-    		winner = "tie";
-	// Now let's get all cases where player wins    
-	} else if (playerMove + computerMove === "rockscissors" || "paperrock" || "scissorspaper") {
-        	winner = "player";
-	} else {
-    		winner = "computer";
-	};
-	return winner;
+        if (playerMove === computerMove) {
+                return "tie";
+	} 
+	if (playerMove + computerMove === "rockscissors" || playerMove + computerMove === "paperrock" || playerMove + computerMove === "scissorspaper") {
+                return "player wins";
+        } 
+	return "computer wins";
+
 }
 
 function playToFive() {
-    console.log("Let's play Rock, Paper, Scissors");
+    console.log("Let's play Rock, Paper, Scissors" + '\n');
     var playerWins = 0;
     var computerWins = 0;
-    // Write code that plays 'Rock, Paper, Scissors' until either the player or the computer has won five times.
-    /* YOUR CODE HERE */
+    
+    for (var i=1; playerWins<5 && computerWins<5; i +=1) {
+        console.log("Let's go for Round " + i);
+        var playerMove; var computerMove;
+        var winner;
+        playerMove = getPlayerMove();
+        computerMove = getComputerMove();
+        winner = getWinner(playerMove,computerMove);
+
+        console.log(winner + ' -> Player chose ' + playerMove + ' while Computer chose ' + computerMove + '\n');        
+        if (winner === 'player wins') {
+            playerWins +=1;
+        } else if (winner === 'computer wins') {
+            computerWins +=1;
+        }   
+        console.log('The score is currently ' + playerWins + ' to ' + computerWins + '\n');
+    }
     return [playerWins, computerWins];
 }
 
+function playToX(x) {
+    console.log("Let's play Rock, Paper, Scissors" + '\n');
+    var playerWins = 0;
+    var computerWins = 0;
+    
+    for (var i=1; playerWins<x && computerWins<x; i +=1) {
+        console.log("Let's go for Round " + i);
+        var playerMove; var computerMove;
+        var winner;
+        playerMove = getPlayerMove();
+        computerMove = getComputerMove();
+        winner = getWinner(playerMove,computerMove);
+        console.log(winner + ' -> Player chose ' + playerMove + ' while Computer chose ' + computerMove + '\n');
+        
+        if (winner === 'player wins') {
+            playerWins +=1;
+        } else if (winner === 'computer wins') {
+            computerWins +=1;
+        } 
+        
+        console.log('The score is currently ' + playerWins + ' to ' + computerWins + '\n');
+    }
+    return [playerWins, computerWins];
+}
